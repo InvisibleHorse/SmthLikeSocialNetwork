@@ -1,3 +1,7 @@
+/* Main classes  */
+
+/* grid-attached classes */
+
 .grid {
   display: grid;
 
@@ -10,21 +14,22 @@
   grid-gap:10px;
 }
 
-.smth {
-  height:10rem;
-  background-image: url("https://static-cse.canva.com/blob/572626/1.magebyRodionKutsaevviaUnsplash.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 .d-grid{
   grid-template-columns: 1fr 5fr !important;
 }
 
+/* main elements classes */
+
 .App {
   text-align: center;
 }
+
+.content {
+  grid-area: content;
+  margin: 20px;
+}
+
+/* header + footer and their elements classes */
 
 .App-logo {
   height: 40vmin;
@@ -34,6 +39,19 @@
 .navbar {
   background-color: #FFF2CC;
 }
+
+.header {
+  grid-area: header;
+}
+
+.nav {
+  grid-area: nav;
+}
+
+.nav-item{
+  margin-left:1rem;
+}
+
 
 .footer {
   margin-top: 10px;
@@ -45,18 +63,7 @@
   margin:0;
 }
 
-.header {
-  grid-area: header;
-}
-
-.nav {
-  grid-area: nav;
-}
-
-.content {
-  grid-area: content;
-  margin: 20px;
-}
+/* menu classes */
 
 .side-bar {
   background-color: #FFF2CC;
@@ -65,9 +72,7 @@
   text-align: left;
 }
 
-.nav-item{
-  margin-left:1rem;
-}
+/* images classes */
 
 .img-container{
   height:8rem;
@@ -78,6 +83,60 @@
   background-size: cover;
 }
 
+.smth {
+  height:10rem;
+  background-image: url("https://static-cse.canva.com/blob/572626/1.magebyRodionKutsaevviaUnsplash.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.profile-image {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  margin-bottom:1rem;
+}
+
+.smth-messages{
+  height:50rem;
+  background-image: url("https://memepedia.ru/wp-content/uploads/2018/06/kto-prochital-tot-sdohnet.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+
+/* likes classes */
+
+.like{
+  width: 1rem;
+  height: 1rem;
+}
+
+.likes-div {
+  display:flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.likes-div p{
+  font-size: 1rem;
+}
+
+.likes-button{
+  border:0ch;
+  background-color: transparent;
+}
+
+/* description and related classes */
+
+.description {
+  text-align: left;
+  padding:1%;
+}
+
 .decription-ul p {
   margin-bottom: 0.3rem;
 }
@@ -86,10 +145,24 @@
   font-family: 'Russo One', sans-serif;
   color:#1e5e31;
 }
-.description {
+
+/* form classes */
+
+.post-form {
   text-align: left;
-  padding:1%;
 }
+
+.submit-button {
+  text-align: right;
+}
+
+.submit-button img {
+  height: 1rem;
+  text-align: center;
+}
+
+
+/* element's styles */
 
 ul {
   list-style-type: none;
@@ -103,17 +176,4 @@ ul h5{
 
 p {
   font-size: 0.8rem;
-}
-
-.post-form {
-  text-align: left;
-}
-
-.submit-button {
-  text-align: right;
-}
-
-.submit-button img {
-  height: 1rem;
-  text-align: center;
 }
