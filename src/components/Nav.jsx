@@ -1,23 +1,26 @@
 import React from "react";
+import {NavLink} from "react-router-dom";
+
+var activeDialog = false;
 
 const Nav = () => {
     return (
-        <nav className="nav side-bar rounded-3">
+        <nav className="nav side-bar rounded-3" id="navmenu">
             <ul className="navbar-nav">
                 <li className="nav-item">
-                    <a href="/" className="nav-link">Home</a>
+                    <NavLink to="/" className="nav-link">Home</NavLink>
                 </li>
                 <li className="nav-item">
-                    <a href="/messages" className="nav-link">Messages</a>
+                    <NavLink to="/messages" className="nav-link">Messages</NavLink>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Saved images</a>
+                    <NavLink className="nav-link" to="/savedimages">Saved images</NavLink>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Porn</a>
+                    <NavLink className="nav-link" to="/settings">Settings</NavLink>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">My fav nudes   </a>
+                    <NavLink className="nav-link" to="/governmentsecrets">Government Secrets</NavLink>
                 </li>
             </ul>
         </nav>

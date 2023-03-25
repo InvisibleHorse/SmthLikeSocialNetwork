@@ -50,6 +50,22 @@
 
 .nav-item{
   margin-left:1rem;
+  
+}
+
+/* id for showing active page */
+
+#navmenu a.active{
+  color: #43b866;
+}
+
+#navmenu {
+  min-height: 37rem;
+}
+
+#navdialog a.active{
+  color: #000000;
+  
 }
 
 
@@ -146,6 +162,10 @@
   color:#1e5e31;
 }
 
+.ingredient{
+  font-weight: bold;
+}
+
 /* form classes */
 
 .post-form {
@@ -176,4 +196,10 @@ ul h5{
 
 p {
   font-size: 0.8rem;
+}
+
+/* editing bootstrap */
+.list-group-item.active {
+  background-color:#43b866 !important;
+  border-color:#1e5e31 !important;
 }

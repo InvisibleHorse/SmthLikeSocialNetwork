@@ -4,13 +4,13 @@ import Background from "./content-components/Background"
 import NewPost from "./content-components/NewPost";
 import PostsList from "./content-components/PostsList";
 
-const Content = () => {
+const Content = (props) => {
     return (
         <div className="content">
             <Background />
             <Intro />
             <NewPost /> 
-            <PostsList />
+            <PostsList posts={props.posts}/>
         </div>
     )
 }
