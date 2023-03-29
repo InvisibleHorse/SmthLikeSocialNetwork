@@ -1,0 +1,84 @@
+/* grid settings */
+
+.uGrid{
+    display: grid;
+  
+    grid-template-areas: 
+    "img name info";
+  
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 1.5fr 7fr 3fr;
+    grid-gap:5rem;
+  }
+
+  .img {
+    grid-area: img;
+  }
+
+  .name {
+    grid-area: name;
+    margin-left:3rem;
+
+  }
+  
+  .info {
+    grid-area: info;
+    margin-top:2.2rem;
+  }
+
+
+  /* div stylings */
+
+.userPlate{
+    margin:3rem;
+}
+
+/* .everythingAtOnce{
+    text-align: left;
+} */
+
+
+  .mainOne{
+    font-family:'Russo One', sans-serif;
+    color:#1e5e31;
+  }
+
+
+  /* text */
+  .elementsAlign{
+    padding-top:2rem;
+  }
+
+  .forH3{
+    padding:2rem;
+  }
+  
+  .forH4{
+    text-align: left;
+  }
+  
+  .title{
+    font-weight: 900;
+    color:#1e5e31 !important;
+  }
+  
+.p{
+    font-size:1rem;
+    color: #43b866;
+    margin-left: 2rem;
+    text-align: left;
+}
+/* img */
+
+.imgStyle {
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1rem;
+    border-radius: 50%;
+
+}
+
+/* button */
+.showMore{
+    margin:1rem;
+}

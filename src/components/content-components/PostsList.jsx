@@ -8,7 +8,7 @@ const PostsList = (props) => {
     return (
         <div className="posts-list">
             <ul>
-                {pla}
+                {pla}  
             </ul>
 
         </div>

@@ -1,6 +1,6 @@
 import React from "react"
 import s from "../Messages.module.css"
-import Contact from "./Contact"
+import Contact from "../Contact"
 
 const Chats = (props) => {
 
