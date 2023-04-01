@@ -3,11 +3,16 @@ import { NavLink } from "react-router-dom";
 import s from "../Users.module.css";
 
 const UserContainer = (props) => {
+
+const followState = () =>{
+    props.followed ? props.unfollow(props.id) : props.follow(props.id)
+}
+
     return (
         <div className={`${s.uGrid} ${s.elementsAlign} bg-light border`}>
             <div className={`${s.img}`}>
                 <img className={`${s.imgStyle}`} src={props.img} alt="Generic placeholder image" />
-                <NavLink to={'/users/' + props.id} className="nav-link"><button className={`btn btn-success rounded-pill px-3`}>Follow</button></NavLink>
+                <NavLink to={'/users/' + props.id} className="nav-link"><button onClick={followState} className={`btn btn-success rounded-pill px-3`}>{props.followed ? 'Unfollow' : 'Follow'}</button></NavLink>
             </div>
             <div className={`${s.everythingAtOnce}`}>
                 <div>
