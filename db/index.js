@@ -17,6 +17,7 @@ app.use(cors({
 mongoose.connect("mongodb://127.0.0.1:27017/users");
 
 const usersSchema = {
+    key: Number,
     name: String,
     img: String,
     from: String,
@@ -25,20 +26,23 @@ const usersSchema = {
     followed:Boolean
 };
  
-const User = mongoose.model("User", usersSchema); 
+const User = mongoose.model("User", usersSchema, "users"); 
 
-app.route ("/users") 
-.get(async function(req, res){
+app
+.get ("/users/:page/:limit", (async function(req, res){
     try {
-        const foundusers = await User.find({}).then(value => res.send(value));
+        const page = parseInt(req.params.page);
+        const limit = parseInt(req.params.limit);
+        const foundusers = await User.find({}).skip(page*limit).limit(limit).then(value => res.send(value));
 
     } catch(error) {
         res.send(error)
     }
-})
+}))
 .post(function (req, res){
 
     const newUser = new User({
+        key: req.body.key,
         name: req.body.name,
         img: req.body.img,
         from: req.body.from,

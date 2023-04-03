@@ -2,9 +2,10 @@ import React from "react"
 import { NavLink } from "react-router-dom";
 import s from "../Users.module.css";
 
+
 const UserContainer = (props) => {
 
-const followState = () =>{
+const followState = () => {
     props.followed ? props.unfollow(props.id) : props.follow(props.id)
 }
 

@@ -4,7 +4,7 @@ import s from "../Users.module.css";
 
 const UsersList = (props) => {
 
-    let usersListElements = props.users.map(u => <UserContainer  setUsers={props.setUsers} follow={props.follow} unfollow={props.unfollow} followed={u.followed} name={u.name} id={u.id} key={u.key} img={u.img} from={u.from} born={u.born} career={u.career}/>)
+    let usersListElements = props.users.map(u => <UserContainer  setUsers={props.setUsers} follow={props.follow} unfollow={props.unfollow} followed={u.followed} name={u.name} id={u.key} img={u.img} from={u.from} born={u.born}s career={u.career}/>)
 
 return(
         <div>

@@ -6,8 +6,6 @@ import { followAC, unfollowAC, setUsersAC } from "../../redux/users-reducer";
 import axios from "axios"
 
 
-
-
 const mapStateToProps = (state) => {
     return { users: state.usersPage.users };
 };
@@ -20,15 +18,30 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const Users = (props) => { 
-    useEffect(() =>{
+const Users = (props) => {
+    const [limit, setLimit] = useState(5);
+    const [page, setPage] = useState(1)
+
+    useEffect(() => {
+        if (props.users.length === 0) {
         axios
-            .get('http://localhost:3001/users/')
+            .get(`http://localhost:3001/users/0/${limit}`)
             .then((res) => {
                 props.setUsers(res.data)
             })
             .catch((err) => console.error(err));
-    }, []);
+        }
+    }, [props.users]);
+
+    const loadMore = () => {
+        axios
+            .get(`http://localhost:3001/users/${page}/${limit}`)
+            .then((res) => {
+                props.setUsers(res.data)
+            })
+            .catch((err) => console.error(err));
+        setPage(page + 1);
+    };
 
 
     return (
@@ -36,7 +49,7 @@ const Users = (props) => {
             <div className={`${s.userPlate} ${s.mainOne} bg-light border rounded-3`}>
                 <UsersList users={props.users} follow={props.follow} unfollow={props.unfollow} setUsers={props.setUsers} />
                 <div className={`${s.showMore}`}>
-                    <button className={`btn btn-success rounded-pill px-3`}>Show more</button>
+                    <button className={`btn btn-success rounded-pill px-3`} onClick={loadMore}>Show more</button>
                 </div>
             </div>
         </div>)
