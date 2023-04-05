@@ -32,6 +32,55 @@
 
 /* header + footer and their elements classes */
 
+.logodiv {
+  position: relative;
+  display: grid;
+
+  grid-template-areas:
+  "logoI logoT empty SignIn";
+
+  grid-template-columns: 1fr 1fr 12fr 3fr;
+  grid-gap:10px;
+}
+.logotext{
+  background-color: #FFF2CC;
+  font-family: 'Russo One', sans-serif;
+  color:#1e5e31;
+  font-size: 1.2rem;
+  padding-top:0.5rem;
+  text-align: left;
+  grid-area:logoT;
+}
+
+.buttonImg {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.logoElement {
+  grid-area:logoI;
+  text-align:left;
+  position:absolute;
+  left:2rem;
+  top: 0.3rem;
+}
+
+.emptySpace{
+  grid-area: empty;
+}
+
+.Signin {
+  grid-area: SignIn;
+  position: absolute;
+  top:0.7rem;
+  left: 85rem;
+}
+
+.signInButton{
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -310,4 +359,36 @@ font-size: 12px;
 .btn-success:hover {
   background-color:#43b866 !important;
   border-color:#43b866 !important;
+}
+
+/*auth*/
+
+.signinLink {
+  color: #43b866;
+  font-weight: bold;
+  font-size:1rem;
+}
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+}
+.signinLinkp {
+  margin: 1.5rem;
+}
+.mainForRegistration{
+  margin-top:5rem;
+}
+.btn-primary{
+  background-color: #1e5e31 !important;
+  border-color: #1e5e31 !important;
+}
+
+.btn-primary:hover{
+  background-color: #43b866 !important;
+  border-color: #43b866 !important;
+}
+
+.AuthFormText {
+  font-family: 'Russo One', sans-serif;
+  color:#1e5e31 !important;
 }

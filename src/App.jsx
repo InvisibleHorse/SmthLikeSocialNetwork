@@ -10,6 +10,8 @@ import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/ProfileContainer';
 import Footer from './components/partials/Footer';
 import Messages from './components/Messages/Messages';
+import AuthContainer from './components/Authorisation/Authorisation-container';
+import Register from './components/Authorisation/Register';
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
             <Route path="/messages/:id" element={<Messages />} />
           </Route>
           <Route path="/users" element={<UsersContainer />} />
+          <Route path="/auth" element={<AuthContainer />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/users/profile/:id" element={<ProfileContainer />} />
           <Route path="/settings" element={<Messages />} />
           <Route path="/governmentsecrets" element={<Messages />} />

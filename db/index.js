@@ -135,7 +135,8 @@ app.post('/register', (req, res) => {
     }
     const user = new User({
       email: req.body.email,
-      password: hash
+      password: hash,
+      name: req.body.name
     });
     user.save();
 
@@ -143,7 +144,7 @@ app.post('/register', (req, res) => {
   });
 });
 
-app.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
+app.post('/auth', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/auth' }));
 app.listen(3001, () => {
   console.log('Server started on port 3000');
 });
