@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-const Header = () => {
+function Header() {
   return (
     <nav className="navbar header">
       <div className="container">
@@ -9,7 +9,7 @@ const Header = () => {
         </a>
       </div>
     </nav>
-  )
+  );
 }
 
 export default Header;

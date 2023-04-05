@@ -1,20 +1,23 @@
-import React from "react"
-import s from "../Messages.module.css"
-import Contact from "../Contact"
+import React from 'react';
+import PropTypes from 'prop-types';
+import s from '../Messages.module.css';
+import Contact from '../Contact';
 
-const Chats = (props) => {
+function Chats(props) {
+  const listOfChatsElements = props.chats.map((ch) => <Contact contactName={ch.contactName} id={ch.id} />);
 
-    let listOfChatsElements = props.chats.map(ch => <Contact contactName={ch.contactName} id={ch.id}/>)
-
-    return (
-        <div className={s.dialogsList}>
-            <nav id="navmenu">
-                <ul className="list-group">
-                    {listOfChatsElements}
-                </ul>
-            </nav>
-        </div>
-    )
+  return (
+    <div className={s.dialogsList}>
+      <nav id="navmenu">
+        <ul className="list-group">
+          {listOfChatsElements}
+        </ul>
+      </nav>
+    </div>
+  );
 }
 
+Chats.propTypes = {
+  chats: PropTypes.instanceOf(Array).isRequired,
+};
 export default Chats;

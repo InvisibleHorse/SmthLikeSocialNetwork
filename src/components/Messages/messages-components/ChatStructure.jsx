@@ -1,20 +1,30 @@
-import React from "react"
-import s from "../Messages.module.css"
+import React from 'react';
+import PropTypes from 'prop-types';
+import s from '../Messages.module.css';
 
-const ChatStructure = (props) => {
-    return (
-        <ul className="idk">
+function ChatStructure(props) {
+  return (
+    <ul className="idk">
 
-        <li className={s.message}>
-        {props.id % 2 === 0 && (<div className="right-float sb1">
-                <p>{props.message}</p>
-            </div>)}
-            {props.id % 2 !== 0 && (<div className="left-float sb2">
-                <p>{props.message}</p>
-            </div>)}
-        </li>
+      <li className={s.message}>
+        {props.id % 2 === 0 && (
+        <div className="right-float sb1">
+          <p>{props.message}</p>
+        </div>
+        )}
+        {props.id % 2 !== 0 && (
+        <div className="left-float sb2">
+          <p>{props.message}</p>
+        </div>
+        )}
+      </li>
     </ul>
-    )
+  );
 }
 
-export default ChatStructure
+ChatStructure.propTypes = {
+  id: PropTypes.number.isRequired,
+  message: PropTypes.string.isRequired,
+};
+
+export default ChatStructure;

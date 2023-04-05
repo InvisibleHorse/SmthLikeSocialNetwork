@@ -1,38 +1,50 @@
-import React from "react"
-import ChatStructure from "./ChatStructure";
-import s from "../Messages.module.css"
-import {useRef} from "react"
+import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
+import ChatStructure from './ChatStructure';
+import s from '../Messages.module.css';
 
-const Chat = (props) => {
+function Chat(props) {
+  const ref = useRef();
+  const SendMessage = () => {
+    props.addMessage();
+  };
 
-    console.log(props)
-    let ref = useRef();
-    let SendMessage = () => {
-        props.addMessage();
-    }
+  const onChangeSendMessage = () => {
+    const message = ref.current.value;
+    props.onChangeNewMessage(message);
+  };
 
-    let onChangeSendMessage = () =>{
-        let message = ref.current.value;
-        props.onChangeNewMessage(message);
-    }
+  const listOfMessagesElements = props.messagesList.map((m) => <ChatStructure message={m.message} id={m.id} />);
 
-    let listOfMessagesElements = props.messagesList.map(m => <ChatStructure message={m.message} id={m.id} />)
-
-    return (
-        <div className={s.messages}>
-            <div className="bg-light border rounded-3 chatArea">``
-                {listOfMessagesElements}
-                <div className="forTextArea">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <button onClick={SendMessage} class="btn btn-outline-warning" type="button">Send</button>
-                        </div>
-                        <textarea onChange={onChangeSendMessage} value={props.messageText} ref={ref} class="form-control" rows="1" aria-label="With textarea"></textarea>
-                    </div>
-                </div>
+  return (
+    <div className={s.messages}>
+      <div className="bg-light border rounded-3 chatArea">
+        ``
+        {listOfMessagesElements}
+        <div className="forTextArea">
+          <div className="input-group">
+            <div className="input-group-prepend">
+              <button onClick={SendMessage} className="btn btn-outline-warning" type="button">Send</button>
             </div>
-        </div >
-    )
+            <textarea
+              onChange={onChangeSendMessage}
+              value={props.messageText}
+              ref={ref}
+              className="form-control"
+              rows="1"
+              aria-label="With textarea"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
+Chat.propTypes = {
+  addMessage: PropTypes.func.isRequired,
+  onChangeNewMessage: PropTypes.func.isRequired,
+  messagesList: PropTypes.instanceOf(Array).isRequired,
+  messageText: PropTypes.string.isRequired,
+};
 
 export default Chat;

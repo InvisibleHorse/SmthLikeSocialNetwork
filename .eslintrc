@@ -1,0 +1,18 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    // disable requiring trailing commas because it might be nice to revert to
+    // being JSON at some point, and I don't want to make big changes now.
+    "comma-dangle": 0,
+    "react/destructuring-assignment": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "jsx-a11y/control-has-associated-label": 0,
+    "default-param-last": 0,
+    "react/require-default-props": 0,
+    "max-len": ["error", { "code": 120 } ]
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  }
+}

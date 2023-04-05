@@ -1,16 +1,22 @@
-import React from "react"
-import Likes from "./Likes"
+import React from 'react';
+import PropTypes from 'prop-types';
+import Likes from './Likes';
 
-const Post = (props) => {
-    return (
-        <div>
-                <li>
-                    <img className="profile-image" src={props.img}/>
-                    <h5>{props.name}</h5>
-                    <p>{props.content}</p>
-                    <Likes />
-                </li>
-        </div>
-    )
+function Post(props) {
+  return (
+    <div>
+      <li>
+        <img alt="profile" className="profile-image" src={props.img} />
+        <h5>{props.name}</h5>
+        <p>{props.content}</p>
+        <Likes />
+      </li>
+    </div>
+  );
 }
-export default Post; 
+Post.propTypes = {
+  name: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  img: PropTypes.string.isRequired,
+};
+export default Post;

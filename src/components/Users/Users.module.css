@@ -82,3 +82,30 @@
 .showMore{
     margin:1rem;
 }
+
+.loadingImg {
+  width: 6%;
+  opacity: 0.75;
+  box-shadow: 0 0 0 0;
+  margin: 10px;
+  transform: scale(1);
+  animation: dogie 2s infinite;
+  border-radius: 50%;
+}
+
+@keyframes dogie {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(208, 182, 36, 0.7);
+  }
+  
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(175, 106, 28, 0);
+  }
+  
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(221, 123, 24, 0);
+  }
+}
