@@ -389,6 +389,7 @@ font-size: 12px;
 .btn-primary{
   background-color: #1e5e31 !important;
   border-color: #1e5e31 !important;
+  font-family: 'Russo One', sans-serif !important;
 }
 
 .btn-primary:hover{

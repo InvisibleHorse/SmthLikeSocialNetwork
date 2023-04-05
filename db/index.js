@@ -1,7 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const ejs = require('ejs');
 const cors = require('cors');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const session = require('express-session');
@@ -16,21 +14,21 @@ const app = express();
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
-
-app.use(session({
-  secret: 'Onyx zaebav.',
-  resave: false,
-  saveUninitialized: false
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(cors({
   origin: 'http://localhost:3000'
 }));
+
+app.use(session({
+  secret: 'Onyx zaebav.',
+  resave: false,
+  saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 mongoose.connect('mongodb://127.0.0.1:27017/users');
 
@@ -50,29 +48,36 @@ const usersSchema = {
 
 const User = mongoose.model('User', usersSchema, 'users');
 
-passport.use(new LocalStrategy((email, password, done) => { // done is a callback function
-  try {
-    User.findOne({ email }).then((user) => {
-      if (!user) {
-        return done(null, false, { message: 'Incorrect Username' });
-      }
-      // using bcrypt to encrypt passoword in register post route and compare function in login post round.
-      // login post route will check here during authentication so need to use compare here
-      bcrypt.compare(password, user.password, (err, result) => {
-        if (err) {
-          return done(err);
+passport.use(new LocalStrategy(
+  { // or whatever you want to use
+    usernameField: 'email', // define the parameter in req.body that passport can use as username and password
+    passwordField: 'password'
+  },
+  ((username, password, done) => { // done is a callback function
+    try {
+      User.findOne({ email: username }).then((user) => {
+        if (!user) {
+          return done(null, false, { message: 'Incorrect Username' });
         }
+        // using bcrypt to encrypt password in register post route and compare function in login post round.
+        // login post route will check here during authentication so need to use compare here
+        bcrypt.compare(password, user.password, (err, result) => {
+          if (err) {
+            console.log('errrr', err);
+            return done(err);
+          }
 
-        if (result) {
-          return done(null, user);
-        }
-        return done(null, false, { message: 'Incorrect Password' });
+          if (result) {
+            return done(null, user);
+          }
+          return done(null, false, { message: 'Incorrect Password' });
+        });
       });
-    });
-  } catch (err) {
-    return done(err);
-  }
-}));
+    } catch (err) {
+      return done(err);
+    }
+  })
+));
 // serialize user
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -144,7 +149,16 @@ app.post('/register', (req, res) => {
   });
 });
 
-app.post('/auth', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/auth' }));
+app.post('/auth', passport.authenticate('local', { successRedirect: '/profile', failureRedirect: '/auth' }));
+
+app.get('/auth', (req, res) => {
+  if (req.isAuthenticated && req.user) {
+    res.status(200).send({ resultCode: 0, email: req.user.email, name: req.user.name });
+  } else {
+    res.status(400).send({ resultCode: 1 });
+  }
+});
+
 app.listen(3001, () => {
   console.log('Server started on port 3000');
 });

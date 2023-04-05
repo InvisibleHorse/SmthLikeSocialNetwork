@@ -1,7 +1,16 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 function Register() {
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('');
+  const [name, setName] = useState('');
+  const handleSubmit = (e) => {
+    console.log(name);
+    e.preventDefault();
+  };
+
   return (
     <div className="mainForRegistration">
       <div className="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
@@ -82,6 +91,8 @@ function Register() {
 
           <div className="form-floating">
             <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               type="text"
               name="Name"
               className="form-control top"
@@ -92,6 +103,8 @@ function Register() {
           </div>
           <div className="form-floating">
             <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               type="email"
               className="form-control"
               id="floatingInput"
@@ -101,6 +114,8 @@ function Register() {
           </div>
           <div className="form-floating">
             <input
+              value={pass}
+              onChange={(e) => setPass(e.target.value)}
               type="password"
               className="form-control"
               id="floatingPassword"
@@ -109,7 +124,11 @@ function Register() {
             <label htmlFor="floatingPassword">Password</label>
           </div>
           <br />
-          <button className="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+          <p className="signinLinkp">
+            Already have an account?
+            <NavLink to="/auth" className="nav-link"><span className="signinLink">Sign in!</span></NavLink>
+          </p>
+          <button onClick={handleSubmit} className="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
 
         </form>
       </main>
