@@ -79,6 +79,14 @@
 .signInButton{
   padding-top: 3px !important;
   padding-bottom: 3px !important;
+  font-family: 'Russo One', sans-serif !important;
+  letter-spacing: 1px;
+  border-color: #1e5e31 !important;
+  color:#1e5e31 !important;
+}
+
+.signInButton:hover{
+  background-color: #1e5e31 !important;
 }
 
 .App-logo {

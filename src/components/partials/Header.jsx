@@ -24,10 +24,10 @@ function Header() {
               {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
               <img
                 className="buttonImg"
-                src="https://cdn-icons-png.flaticon.com/512/5125/5125078.png"
+                src="https://cdn-icons-png.flaticon.com/512/5125/5125062.png"
                 alt="Sign-in Image"
-                width="30"
-                height="26"
+                width="25"
+                height="21"
               />
               Login
             </button>
