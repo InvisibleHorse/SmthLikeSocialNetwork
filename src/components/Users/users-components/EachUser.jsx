@@ -19,7 +19,11 @@ function EachUser(props) {
           to={`/users/profile/${props.id}`}
           className="nav-link"
         >
-          <img className={`${s.imgStyle}`} src={props.img} alt="Generic placeholder" />
+          <img
+            className={`${s.imgStyle}`}
+            src={props.img != null ? props.img : 'https://img.freepik.com/free-icon/motorcyclist_318-210119.jpg?w=2000'}
+            alt="Generic placeholder"
+          />
         </NavLink>
         <button type="button" onClick={followState} className="btn btn-success rounded-pill px-3">
           {props.followed ? 'Unfollow' : 'Follow'}
@@ -28,19 +32,7 @@ function EachUser(props) {
       <div className={`${s.everythingAtOnce}`}>
         <div>
           <h4 className={`${s.forH4}`}>{props.name}</h4>
-          <p className={`${s.p}`}>
-            <span className={`${s.title} ${s.p}`}>Born:  </span>
-            {props.born}
-          </p>
-          <p className={`${s.p}`}>
-            <span className={`${s.title} ${s.p}`}>Career:  </span>
-            {props.career}
-          </p>
         </div>
-      </div>
-      <div className={`${s.info}`}>
-        <p className={`${s.title} ${s.p}`}>From:</p>
-        <p className={`${s.p}`}>{props.from}</p>
       </div>
     </div>
   );
@@ -48,10 +40,7 @@ function EachUser(props) {
 EachUser.propTypes = {
   follow: PropTypes.func.isRequired,
   unfollow: PropTypes.func.isRequired,
-  from: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  born: PropTypes.string.isRequired,
-  career: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
   followed: PropTypes.bool.isRequired,
   id: PropTypes.number.isRequired,

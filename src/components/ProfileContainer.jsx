@@ -19,7 +19,7 @@ function ProfileContainer(props) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/users/${id}`)
+      .get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
       .then((res) => {
         props.setUserProfile(res.data);
       })

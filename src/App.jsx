@@ -4,8 +4,6 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import axios from 'axios';
-import PropTypes from 'prop-types';
 import Header from './components/partials/Header';
 import Nav from './components/Nav';
 import UsersContainer from './components/Users/UsersContainer';
@@ -15,26 +13,7 @@ import Messages from './components/Messages/Messages';
 import AuthContainer from './components/Authorisation/Authorisation-container';
 import Register from './components/Authorisation/Register';
 
-function App(props) {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:3001/auth', {
-        withCredentials: true
-      })
-      .then((response) => {
-        if (response.data.resultCode === 0) {
-          const { email, name } = response.data;
-          props.setUsersData(email, name);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        navigate('/auth');
-      });
-  }, []);
-
+function App() {
   return (
     <div className="App">
       <div className="grid">
@@ -57,9 +36,5 @@ function App(props) {
     </div>
   );
 }
-
-App.propTypes = {
-  setUsersData: PropTypes.func.isRequired,
-};
 
 export default App;

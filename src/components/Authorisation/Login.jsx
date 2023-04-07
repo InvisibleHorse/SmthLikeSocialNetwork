@@ -1,14 +1,15 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-function Login() {
+function Login(props) {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
 
   const handleSubmit = (e) => {
-    console.log(email);
     e.preventDefault();
+    props.handleLogin(email, pass);
   };
 
   return (
@@ -124,5 +125,9 @@ function Login() {
     </form>
   );
 }
+
+Login.propTypes = {
+  handleLogin: PropTypes.func.isRequired,
+};
 
 export default Login;

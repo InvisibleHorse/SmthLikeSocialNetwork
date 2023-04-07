@@ -9,6 +9,7 @@
     "jsx-a11y/control-has-associated-label": 0,
     "default-param-last": 0,
     "react/require-default-props": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
     "max-len": ["error", { "code": 120 } ]
   },
   "env": {

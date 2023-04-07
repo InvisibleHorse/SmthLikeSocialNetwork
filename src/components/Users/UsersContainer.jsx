@@ -1,67 +1,65 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import PropTypes from 'prop-types';
+
 import {
-  follow, unfollow, setUsers, toggleisFetching
+  follow, unfollow, setUsers, toggleIsFetching, setCurrentPage, setTotalUsersCount,
 } from '../../redux/users-reducer';
 import Users from './Users';
 import Preloader from '../content-components/Preloader';
-import s from './Users.module.css';
+
+import { usersAPI } from "../../api/api";
 
 const mapStateToProps = (state) => ({
   users: state.usersPage.users,
+  pageSize: state.usersPage.pageSize,
+  totalUsersCount: state.usersPage.totalUsersCount,
+  currentPage: state.usersPage.currentPage,
   isFetching: state.usersPage.isFetching
 });
 
-function UsersContainer(props) {
-  const [limit] = useState(5);
-  const [page, setPage] = useState(1);
+class UsersContainer extends React.Component {
+  componentDidMount() {
+    this.props.toggleIsFetching(true);
 
-  useEffect(() => {
-    if (props.users.length === 0) {
-      props.toggleisFetching(true);
-      axios
-        .get(`http://localhost:3001/users/0/${limit}`)
-        .then((res) => {
-          props.toggleisFetching(false);
-          props.setUsers(res.data);
-        })
-        .catch((err) => console.error(err));
-    }
-  }, [props.users]);
+    usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
 
-  const loadMore = () => {
-    props.toggleisFetching(true);
-    axios
-      .get(`http://localhost:3001/users/${page}/${limit}`)
-      .then((res) => {
-        props.toggleisFetching(false);
-        props.setUsers(res.data);
-      })
-      .catch((err) => console.error(err));
-    setPage(page + 1);
-  };
+      this.props.toggleIsFetching(false);
+      this.props.setUsers(data.items);
+      this.props.setTotalUsersCount(data.totalCount);
+    });
+  }
+  onPageChanged = (pageNumber) => {
+    this.props.setCurrentPage(pageNumber);
+    this.props.toggleIsFetching(true);
 
-  return (
-    <div>
-      <Users users={props.users} follow={props.follow} unfollow={props.unfollow} setUsers={props.setUsers} />
-      {props.isFetching ? <Preloader /> : null}
-      <div className={`${s.showMore}`}>
-        <button type="button" className="btn btn-success rounded-pill px-3" onClick={loadMore}>Show more</button>
-      </div>
-    </div>
-  );
+    usersAPI.getUsers(pageNumber, this.props.pageSize)
+      .then(data => {
+        this.props.toggleIsFetching(false);
+        this.props.setUsers(data.items);
+      });
+  }
+
+  render() {
+    return <>
+      { this.props.isFetching ? <Preloader /> : null }
+      <Users totalUsersCount={this.props.totalUsersCount}
+             pageSize={this.props.pageSize}
+             currentPage={this.props.currentPage}
+             onPageChanged={this.onPageChanged}
+             users={this.props.users}
+             follow={this.props.follow}
+             unfollow={this.props.unfollow}
+      />
+    </>
+  }
+
 }
-UsersContainer.propTypes = {
-  users: PropTypes.instanceOf(Array).isRequired,
-  unfollow: PropTypes.func.isRequired,
-  follow: PropTypes.func.isRequired,
-  setUsers: PropTypes.func.isRequired,
-  toggleisFetching: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-};
-
-export default connect(mapStateToProps, {
-  follow, unfollow, setUsers, toggleisFetching
-})(UsersContainer);
+export default connect(mapStateToProps,
+  {
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    toggleIsFetching})
+    (UsersContainer);

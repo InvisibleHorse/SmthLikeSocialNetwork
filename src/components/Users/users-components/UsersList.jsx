@@ -4,6 +4,13 @@ import EachUser from './EachUser';
 import s from '../Users.module.css';
 
 function UsersList(props) {
+  const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+
+  const pages = [];
+  for (let i = 1; i <= pagesCount; i += 1) {
+    pages.push(i);
+  }
+
   const usersListElements = props.users.map(
     (u) => (
       <EachUser
@@ -13,17 +20,27 @@ function UsersList(props) {
         followed={u.followed}
         name={u.name}
         id={u.key}
-        key={u.key}
         img={u.img}
-        from={u.from}
-        born={u.born}
-        career={u.career}
       />
     )
   );
 
   return (
     <div>
+      <div>
+        {pages.map((p) => (
+          <span
+            role="textbox"
+            tabIndex={0}
+            className={props.currentPage === p && s.selectedPage}
+            onClick={() => {
+              props.onPageChanged(p);
+            }}
+          >
+            {p}
+          </span>
+        ))}
+      </div>
       <h3 className={`${s.forH3}`}>Users: </h3>
       {usersListElements}
     </div>
@@ -35,6 +52,10 @@ UsersList.propTypes = {
   setUsers: PropTypes.func.isRequired,
   follow: PropTypes.func.isRequired,
   unfollow: PropTypes.func.isRequired,
+  totalUsersCount: PropTypes.number.isRequired,
+  pageSize: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  onPageChanged: PropTypes.func.isRequired
 };
 
 export default UsersList;

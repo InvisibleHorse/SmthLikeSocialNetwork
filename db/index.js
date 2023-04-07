@@ -17,9 +17,7 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
-app.use(cors({
-  origin: 'http://localhost:3000'
-}));
+app.use(cors({ credentials: true, origin: true }));
 
 app.use(session({
   secret: 'Onyx zaebav.',
@@ -152,7 +150,9 @@ app.post('/register', (req, res) => {
 app.post('/auth', passport.authenticate('local', { successRedirect: '/profile', failureRedirect: '/auth' }));
 
 app.get('/auth', (req, res) => {
-  if (req.isAuthenticated && req.user) {
+  console.log(req);
+  console.log(req.isAuthenticated());
+  if (req.isAuthenticated() && req.user) {
     res.status(200).send({ resultCode: 0, email: req.user.email, name: req.user.name });
   } else {
     res.status(400).send({ resultCode: 1 });
