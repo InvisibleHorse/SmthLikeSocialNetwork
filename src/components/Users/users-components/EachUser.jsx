@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import s from '../Users.module.css';
 
 function EachUser(props) {
-  const followState = () => {
-    if (props.followed) {
-      props.unfollow(props.id);
-    } else {
-      props.follow(props.id);
-    }
-  };
+  const { id } = props;
+  const followState = useCallback(() => {
+    props.toggleIsFollowingProgress(true, props.id);
+    axios
+      .put(`http://localhost:3001/users/${id}`, { followed: !props.followed })
+      .then((res) => {
+        if (res.data.followed) {
+          props.follow(id);
+        } else {
+          props.unfollow(id);
+        }
+        props.toggleIsFollowingProgress(false, props.id);
+      })
+      .catch((err) => console.error(err));
+  }, [id, props.followed]);
 
   return (
     <div className={`${s.uGrid} ${s.elementsAlign} bg-light border`}>
@@ -21,7 +30,12 @@ function EachUser(props) {
         >
           <img className={`${s.imgStyle}`} src={props.img} alt="Generic placeholder" />
         </NavLink>
-        <button type="button" onClick={followState} className="btn btn-success rounded-pill px-3">
+        <button
+          disabled={props.followingInProgress.some((key) => key === props.id)}
+          type="button"
+          onClick={followState}
+          className="btn btn-success rounded-pill px-3"
+        >
           {props.followed ? 'Unfollow' : 'Follow'}
         </button>
       </div>
@@ -55,5 +69,7 @@ EachUser.propTypes = {
   img: PropTypes.string.isRequired,
   followed: PropTypes.bool.isRequired,
   id: PropTypes.number.isRequired,
+  toggleIsFollowingProgress: PropTypes.func.isRequired,
+  followingInProgress: PropTypes.instanceOf(Array).isRequired,
 };
 export default EachUser;

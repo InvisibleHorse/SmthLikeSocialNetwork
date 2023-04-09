@@ -105,7 +105,7 @@ app
       res.send(error);
     }
   }))
-  .post((req, res) => {
+  .post('/users/:page/:limit', (req, res) => {
     const newUser = new User({
       key: req.body.key,
       name: req.body.name,
@@ -119,7 +119,7 @@ app
 
     newUser.save();
   })
-  .delete((req, res) => {
+  .delete('/users/:page/:limit', (req, res) => {
     User.deleteMany().then((value) => res.send(value));
   });
 
@@ -131,7 +131,26 @@ app
     } catch (error) {
       res.send(error);
     }
-  }));
+  }))
+  .put('/users/:id', async (req, res) => {
+    try {
+      const findUser = await User.findOneAndUpdate(
+        {
+          key: req.params.id
+        },
+        {
+          followed: req.body.followed
+        },
+        {
+          new: true,
+          upsert: true // Make this update into an upsert
+        }
+      );
+      res.send({ followed: findUser.followed });
+    } catch (error) {
+      res.send(error);
+    }
+  });
 
 app.post('/register', (req, res) => {
   bcrypt.hash(req.body.password, 10, (err, hash) => { // 10 is SaltRounds

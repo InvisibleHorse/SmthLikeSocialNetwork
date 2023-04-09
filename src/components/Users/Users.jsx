@@ -7,7 +7,15 @@ function Users(props) {
   return (
     <div>
       <div className={`${s.userPlate} ${s.mainOne} bg-light border rounded-3`}>
-        <UsersList users={props.users} follow={props.follow} unfollow={props.unfollow} setUsers={props.setUsers} />
+        <UsersList
+          users={props.users}
+          toggleIsFollowingProgress={props.toggleIsFollowingProgress}
+          followingInProgress={props.followingInProgress}
+          follow={props.follow}
+          unfollow={props.unfollow}
+          setUsers={props.setUsers}
+          isFetching={props.isFetching}
+        />
       </div>
     </div>
   );
@@ -17,6 +25,9 @@ Users.propTypes = {
   unfollow: PropTypes.func.isRequired,
   follow: PropTypes.func.isRequired,
   setUsers: PropTypes.func.isRequired,
+  toggleIsFollowingProgress: PropTypes.func.isRequired,
+  followingInProgress: PropTypes.instanceOf(Array).isRequired,
+  isFetching: PropTypes.bool.isRequired,
 };
 
 export default Users;

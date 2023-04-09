@@ -2,10 +2,10 @@
 
 .uGrid{
     display: grid;
-  
-    grid-template-areas: 
+
+    grid-template-areas:
     "img name info";
-  
+
     grid-template-rows: 60px 1fr;
     grid-template-columns: 1.5fr 7fr 3fr;
     grid-gap:5rem;
@@ -20,7 +20,7 @@
     margin-left:3rem;
 
   }
-  
+
   .info {
     grid-area: info;
     margin-top:2.2rem;
@@ -52,16 +52,16 @@
   .forH3{
     padding:2rem;
   }
-  
+
   .forH4{
     text-align: left;
   }
-  
+
   .title{
     font-weight: 900;
     color:#1e5e31 !important;
   }
-  
+
 .p{
     font-size:1rem;
     color: #43b866;
@@ -81,31 +81,4 @@
 /* button */
 .showMore{
     margin:1rem;
-}
-
-.loadingImg {
-  width: 6%;
-  opacity: 0.75;
-  box-shadow: 0 0 0 0;
-  margin: 10px;
-  transform: scale(1);
-  animation: dogie 2s infinite;
-  border-radius: 50%;
-}
-
-@keyframes dogie {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(208, 182, 36, 0.7);
-  }
-  
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 10px rgba(175, 106, 28, 0);
-  }
-  
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(221, 123, 24, 0);
-  }
 }

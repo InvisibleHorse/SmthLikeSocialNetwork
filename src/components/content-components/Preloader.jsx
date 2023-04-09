@@ -1,9 +1,11 @@
 import React from 'react';
-import loadingImage from '../../assets/giphy.gif';
-import s from '../Users/Users.module.css';
 
 function Preloader() {
-  return <img className={`${s.loadingImg}`} src={loadingImage} alt="loading" />;
+  return (
+    <div className="spinner-border text-success" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </div>
+  );
 }
 
 export default Preloader;

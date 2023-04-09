@@ -10,6 +10,9 @@ function UsersList(props) {
         setUsers={props.setUsers}
         follow={props.follow}
         unfollow={props.unfollow}
+        toggleIsFollowingProgress={props.toggleIsFollowingProgress}
+        followingInProgress={props.followingInProgress}
+        isFetching={props.isFetching}
         followed={u.followed}
         name={u.name}
         id={u.key}
@@ -35,6 +38,9 @@ UsersList.propTypes = {
   setUsers: PropTypes.func.isRequired,
   follow: PropTypes.func.isRequired,
   unfollow: PropTypes.func.isRequired,
+  toggleIsFollowingProgress: PropTypes.func.isRequired,
+  followingInProgress: PropTypes.instanceOf(Array).isRequired,
+  isFetching: PropTypes.bool.isRequired,
 };
 
 export default UsersList;

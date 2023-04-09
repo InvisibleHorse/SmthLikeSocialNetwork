@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import {
-  follow, unfollow, setUsers, toggleisFetching
+  follow, unfollow, setUsers, toggleisFetching, toggleIsFollowingProgress
 } from '../../redux/users-reducer';
 import Users from './Users';
 import Preloader from '../content-components/Preloader';
@@ -11,7 +11,8 @@ import s from './Users.module.css';
 
 const mapStateToProps = (state) => ({
   users: state.usersPage.users,
-  isFetching: state.usersPage.isFetching
+  isFetching: state.usersPage.isFetching,
+  followingInProgress: state.usersPage.followingInProgress,
 });
 
 function UsersContainer(props) {
@@ -45,7 +46,15 @@ function UsersContainer(props) {
 
   return (
     <div>
-      <Users users={props.users} follow={props.follow} unfollow={props.unfollow} setUsers={props.setUsers} />
+      <Users
+        users={props.users}
+        followingInProgress={props.followingInProgress}
+        follow={props.follow}
+        isFetching={props.isFetching}
+        unfollow={props.unfollow}
+        setUsers={props.setUsers}
+        toggleIsFollowingProgress={props.toggleIsFollowingProgress}
+      />
       {props.isFetching ? <Preloader /> : null}
       <div className={`${s.showMore}`}>
         <button type="button" className="btn btn-success rounded-pill px-3" onClick={loadMore}>Show more</button>
@@ -60,8 +69,10 @@ UsersContainer.propTypes = {
   setUsers: PropTypes.func.isRequired,
   toggleisFetching: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  followingInProgress: PropTypes.instanceOf(Array).isRequired,
+  toggleIsFollowingProgress: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, {
-  follow, unfollow, setUsers, toggleisFetching
+  follow, unfollow, setUsers, toggleisFetching, toggleIsFollowingProgress
 })(UsersContainer);
